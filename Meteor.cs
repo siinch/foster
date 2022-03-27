@@ -9,6 +9,7 @@ public class Meteor : MonoBehaviour
     private float pixelsPerUnit = 20.0f;
     void Start()
     {
+
         Texture2D texture = Game.instance.meteorTextures[
             Mathf.FloorToInt(
                 Random.Range(0, Game.instance.meteorTextures.Length)
@@ -29,5 +30,14 @@ public class Meteor : MonoBehaviour
 
         CircleCollider2D collider = gameObject.AddComponent<CircleCollider2D>();
         collider.radius *= 0.80f;
+    }
+
+    void Update () {
+        Vector2 playerPosition = Player.instance.transform.position;
+        Vector2 meteorPosition = transform.position;
+        if(Vector2.Distance(playerPosition, meteorPosition) > 100) {
+            MeteorSpawner.count--;
+            Destroy(gameObject);
+        }
     }
 }

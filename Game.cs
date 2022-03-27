@@ -31,6 +31,9 @@ public class Game : MonoBehaviour
 
         GameObject camara = new GameObject();
         camara.AddComponent<Cam>();
+
+        GameObject meteorSpawner = new GameObject();
+        meteorSpawner.AddComponent<MeteorSpawner>();
     }
     void Start()
     {
