@@ -13,11 +13,14 @@ public class Player : MonoBehaviour
     public static Player instance;
     private float pixelsPerUnit = 100.0f;
     public Energy energy;
+    public Rigidbody2D rigidbody; 
 
     void Awake() {
         rb = gameObject.AddComponent<Rigidbody2D>();
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
         sr = gameObject.AddComponent<SpriteRenderer>();
         instance = this;
+        tag = "Player";
     }
     void Start()
     {
@@ -50,16 +53,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        force = new Vector2(
-            Input.GetAxis("Horizontal"),
-            Input.GetAxis("Vertical")
-        ).normalized * speed;
-
-        if(Input.GetButton("Horizontal") || Input.GetButton("Vertical")) {
-            rotation = Vector2.SignedAngle(Vector2.up, force);
-            energy.Change(-energy.flyCost);
-        }
-
         if(Input.GetKeyDown("p"))
         {
             Time.timeScale = 0.0f;
@@ -73,7 +66,19 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(force);
+		force = new Vector2(
+			Input.GetAxis("Horizontal"),
+			Input.GetAxis("Vertical")
+		).normalized * speed;
+
+		if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+		{
+			rotation = Vector2.SignedAngle(Vector2.up, force);
+			energy.Change(-energy.flyCost);
+		}
+
+		rb.AddForce(force);
         rb.MoveRotation(rotation);
-    }
+
+	}
 }

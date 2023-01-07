@@ -7,7 +7,7 @@ public class MeteorSpawner : MonoBehaviour
     
     public static int count = 0;
     public  static int maxCount = 100;
-    void Update () {
+    void FixedUpdate () {
         if(count < maxCount) {
             Vector2 playerPosition = Player.instance.transform.position;
 

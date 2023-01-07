@@ -32,7 +32,7 @@ public class Meteor : MonoBehaviour
         collider.radius *= 0.80f;
     }
 
-    void Update () {
+    void FixedUpdate () {
         Vector2 playerPosition = Player.instance.transform.position;
         Vector2 meteorPosition = transform.position;
         if(Vector2.Distance(playerPosition, meteorPosition) > 100) {

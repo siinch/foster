@@ -7,7 +7,7 @@ public class Cam : MonoBehaviour
     private Camera cam;
     private AudioListener audioListener;
     private float speed = 3.0f;
-    private float offset = 2.0f;
+    private float offset = 6.0f;
     public static Cam instance;
     public Vector3 deltaPosition = Vector3.zero;
     private Vector3 lastPosition;
@@ -15,7 +15,7 @@ public class Cam : MonoBehaviour
     private Vector3 offsetDirection = new Vector3(0.0f, 0.0f, -10.0f);
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
         name = "Cam";
@@ -33,12 +33,11 @@ public class Cam : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        //transform.position = Player.instance.transform.position + Vector3.back * 10;
-        if(Input.GetButton("Horizontal") || Input.GetButton("Vertical")) 
+    {
+        var velocity = Player.instance.rigidbody.velocity;
             offsetDirection = new Vector3(
-                Input.GetAxis("Horizontal") * offset, 
-                Input.GetAxis("Vertical") * offset, 
+                velocity.x,
+				velocity.y, 
                 -10.0f
             );
 

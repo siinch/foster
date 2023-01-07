@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     public Texture2D exhaustTexture;
     public Texture2D exhaustTrailTexture;
     public Texture2D energyTexture;
+    public Texture2D batteryTexture;
     public Texture2D[] meteorTextures;
     public static Game instance;
     void Awake () {
@@ -36,6 +37,9 @@ public class Game : MonoBehaviour
 
         GameObject meteorSpawner = new GameObject();
         meteorSpawner.AddComponent<MeteorSpawner>();
+
+		GameObject batterySpawner = new GameObject();
+		meteorSpawner.AddComponent<BatterySpawner>();
 
 		Physics2D.gravity = Vector2.zero;
 
