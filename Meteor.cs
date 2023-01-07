@@ -9,7 +9,7 @@ public class Meteor : MonoBehaviour
     private float pixelsPerUnit = 20.0f;
     void Start()
     {
-
+        name = "Meteor";
         Texture2D texture = Game.instance.meteorTextures[
             Mathf.FloorToInt(
                 Random.Range(0, Game.instance.meteorTextures.Length)

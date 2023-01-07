@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,15 +11,17 @@ public class Player : MonoBehaviour
     private Vector2 force;
     private float speed;
     public static Player instance;
-    private float pixelsPerUnit = 100;
+    private float pixelsPerUnit = 100.0f;
+    public Energy energy;
 
     void Awake() {
         rb = gameObject.AddComponent<Rigidbody2D>();
         sr = gameObject.AddComponent<SpriteRenderer>();
-        Player.instance = this;
+        instance = this;
     }
     void Start()
-    {   
+    {
+        name = "Player";
         Texture2D texture = Game.instance.playerTexture;
         Sprite sprite = Sprite.Create(
             texture, 
@@ -31,14 +34,17 @@ public class Player : MonoBehaviour
         
         sr.sprite = sprite;
         speed = 10f;
-        rb.drag = 1;
-        rb.gravityScale = 0;
+        rb.drag = 1.0f;
+        rb.gravityScale = 0.0f;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-        rotation = -52;
+        rotation = -52.0f;
         GameObject exhaust = new GameObject();
         exhaust.AddComponent<Exhaust>();
         exhaust.transform.position = transform.position + Vector3.down * 0.5f;
         exhaust.transform.parent = transform;
+
+        this.AddComponent<Energy>();
+        energy= this.GetComponent<Energy>();
     }
 
     // Update is called once per frame
@@ -51,8 +57,19 @@ public class Player : MonoBehaviour
 
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical")) {
             rotation = Vector2.SignedAngle(Vector2.up, force);
+            energy.Change(-energy.flyCost);
         }
-    }
+
+        if(Input.GetKeyDown("p"))
+        {
+            Time.timeScale = 0.0f;
+        }
+
+		if (Input.GetKeyUp("p"))
+		{
+			Time.timeScale = 1.0f;
+		}
+	}
 
     void FixedUpdate()
     {

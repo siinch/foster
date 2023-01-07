@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Game : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Game : MonoBehaviour
     public Texture2D backgroundTexture;
     public Texture2D exhaustTexture;
     public Texture2D exhaustTrailTexture;
+    public Texture2D energyTexture;
     public Texture2D[] meteorTextures;
     public static Game instance;
     void Awake () {
@@ -34,15 +36,10 @@ public class Game : MonoBehaviour
 
         GameObject meteorSpawner = new GameObject();
         meteorSpawner.AddComponent<MeteorSpawner>();
-    }
-    void Start()
-    {
 
-    }
+		Physics2D.gravity = Vector2.zero;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		var canvasObject = new GameObject();
+		canvasObject.AddComponent<GameCanvas>();
+	}
 }

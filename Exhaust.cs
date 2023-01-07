@@ -28,7 +28,7 @@ public class Exhaust : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {   
         if(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
             sr.enabled = true;

@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
     private static Texture2D texture;
     private static float width;
     private static float height;
-    public static int multiplier = 3;
+    public static int multiplier = 5;
 
     private static float xJumpLenght;
     private static float yJumpLenght;

@@ -18,6 +18,7 @@ public class Cam : MonoBehaviour
     void Start()
     {
         instance = this;
+        name = "Cam";
         audioListener = gameObject.AddComponent<AudioListener>();
         cam = gameObject.AddComponent<Camera>();
         cam.clearFlags = CameraClearFlags.SolidColor;
